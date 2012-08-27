@@ -27,18 +27,19 @@ if (req.request != "GET" &&
 	/* Non-RFC2616 or CONNECT which is weird. */
 	return (pipe);
 }
+
 if (req.request != "GET" && req.request != "HEAD") {
 	/* We only deal with GET and HEAD by default */
 	return (pass);
 }
+
+# Normalize the "Accept-Encoding" headers
 if (req.http.Accept-Encoding) {
 	if (req.url ~ "\.(jpg|png|gif|gz|tgz|bz2|tbz|mp3|ogg)$") {
 		# No point in compressing these
 		remove req.http.Accept-Encoding;
 	} elsif (req.http.Accept-Encoding ~ "gzip") {
 		set req.http.Accept-Encoding = "gzip";
-	} elsif (req.http.Accept-Encoding ~ "deflate") {
-		set req.http.Accept-Encoding = "deflate";
 	} else {
 		# unkown algorithm
 		remove req.http.Accept-Encoding;
