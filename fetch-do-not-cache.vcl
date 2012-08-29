@@ -12,4 +12,4 @@ if (beresp.status != 200) {
 
 
 # Do not cache any static content
-include fetch-static-content.vcl
+include fetch-do-not-cache-static-content.vcl
