@@ -9,11 +9,15 @@ if (req.url ~ "\.xml(\.gz)?$") { unset beresp.http.cookie; return (hit_for_pass)
 
 
 # Do not cache images (and remove the cookie, if any)
-if (req.url ~ "\.(jpg|jpeg|png|gif|ico|tiff|tif|bmp|ppm|pgm|xcf|psd|webp)") { unset beresp.http.cookie; return (hit_for_pass); }
+if (req.url ~ "\.(jpg|jpeg|png|gif|ico|tiff|tif|bmp|ppm|pgm|xcf|psd|webp|svg)") { unset beresp.http.cookie; return (hit_for_pass); }
 
 
 # Do not cache CSS & JS
 if (req.url ~ "\.(css|js)") { unset beresp.http.cookie; return (hit_for_pass); }
+
+
+# Do not fonts
+if (req.url ~ "\.(woff|eot|otf|ttf)") { unset beresp.http.cookie; return (hit_for_pass); }
 
 
 # Do not cache other static content
