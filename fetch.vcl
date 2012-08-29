@@ -14,4 +14,9 @@ if (beresp.status == 404 || beresp.status == 503 || beresp.status == 500) {
 
 # Do not cache other static content
 
+# Do not cache anything, if backend response is NOT 200.
+if (beresp.status != 200) {
+	set beresp.http.Cache-Control = "max-age=0";
+	return (hit_for_pass);
+}
 
