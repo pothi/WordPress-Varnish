@@ -17,6 +17,22 @@ sub vcl_recv {
 	return (lookup);
 }
 
+sub vcl_hit {
+    if (req.request == "PURGE") {
+        purge;
+        error 200 "Purged";
+    }
+    return (deliver);
+}
+
+sub vcl_miss {
+    if (req.request == "PURGE") {
+        purge;
+        error 200 "Purged";
+    }
+    return (fetch);
+}
+
 sub vcl_fetch {
 	include fetch-do-not-cache.vcl;
 
