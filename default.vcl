@@ -13,7 +13,7 @@ acl purge {
 }
 
 sub vcl_recv {
-	include receive.vcl;
+	include "receive.vcl";
 	return (lookup);
 }
 
@@ -34,7 +34,7 @@ sub vcl_miss {
 }
 
 sub vcl_fetch {
-	include fetch-do-not-cache.vcl;
+	include "fetch-do-not-cache.vcl";
 
 	# The default value of 120s can be modified here
 	set beresp.ttl = 300s;
