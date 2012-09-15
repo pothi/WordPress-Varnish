@@ -40,3 +40,14 @@ sub vcl_fetch {
 	# set beresp.ttl = 300s;
 	return (deliver);
 }
+
+sub vcl_deliver {
+    # Hide server header
+    unset resp.http.X-Powered-By;
+    unset resp.http.Server;
+    unset resp.http.Via;
+    unset resp.http.X-Varnish;
+    unset resp.http.X-Pingback;
+
+    return (deliver);
+}
