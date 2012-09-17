@@ -9,6 +9,11 @@ if (req.url ~ "wp-(login|admin)" || req.url ~ "preview=true") {
 	return (hit_for_pass);
 }
 
+# Contact Pages
+if (req.url ~ "contact") {
+    return (hit_for_pass);
+}
+
 
 # If backend response is NOT 200.
 if (beresp.status != 200) {

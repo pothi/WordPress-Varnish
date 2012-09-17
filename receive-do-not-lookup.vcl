@@ -2,3 +2,8 @@
 if (req.http.Cookie ~ "wordpress_" || req.http.Cookie ~ "comment_") {
 	return (pass);
 }
+
+# Contact Pages
+if (req.url ~ "contact") {
+    return (pass);
+}
