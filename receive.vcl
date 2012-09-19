@@ -40,6 +40,8 @@ if (req.http.Accept-Encoding) {
 		remove req.http.Accept-Encoding;
 	} elsif (req.http.Accept-Encoding ~ "gzip") {
 		set req.http.Accept-Encoding = "gzip";
+	} elsif (req.http.Accept-Encoding ~ "deflate" && req.http.user-agent !~ "MSIE") {
+		set req.http.Accept-Encoding = "deflate";
 	} else {
 		# unkown algorithm
 		remove req.http.Accept-Encoding;
