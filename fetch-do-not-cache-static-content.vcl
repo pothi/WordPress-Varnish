@@ -5,6 +5,7 @@
 # Sitemaps
 if (req.url ~ "\.xml(\.gz)?$") {
 	unset beresp.http.cookie;
+	set beresp.http.X-Cacheable = "NO: Sitemaps aren't cached";
 	return (hit_for_pass);
 }
 
@@ -12,6 +13,7 @@ if (req.url ~ "\.xml(\.gz)?$") {
 # Images
 if (req.url ~ "\.(jpg|jpeg|png|gif|ico|tiff|tif|bmp|ppm|pgm|xcf|psd|webp|svg)") {
 	unset beresp.http.cookie;
+	set beresp.http.X-Cacheable = "NO: Images aren't cached";
 	return (hit_for_pass);
 }
 
@@ -19,6 +21,7 @@ if (req.url ~ "\.(jpg|jpeg|png|gif|ico|tiff|tif|bmp|ppm|pgm|xcf|psd|webp|svg)") 
 # CSS & JS
 if (req.url ~ "\.(css|js)") {
 	unset beresp.http.cookie;
+	set beresp.http.X-Cacheable = "NO: CSS & JS files aren't cached";
 	return (hit_for_pass);
 }
 
@@ -26,6 +29,7 @@ if (req.url ~ "\.(css|js)") {
 # Fonts
 if (req.url ~ "\.(woff|eot|otf|ttf)") {
 	unset beresp.http.cookie;
+	set beresp.http.X-Cacheable = "NO: Webfonts aren't cached";
 	return (hit_for_pass);
 }
 
@@ -33,6 +37,7 @@ if (req.url ~ "\.(woff|eot|otf|ttf)") {
 # Other static content
 if (req.url ~ "\.(zip|sql|tar|gz|bzip2|mp3|mp4|flv|ogg|swf)") {
 	unset beresp.http.cookie;
+	set beresp.http.X-Cacheable = "NO: Misc files aren't cached";
 	return (hit_for_pass);
 }
 
