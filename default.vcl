@@ -46,6 +46,7 @@ sub vcl_miss {
 }
 
 sub vcl_fetch {
+	include "fetch.vcl";
 	include "fetch-do-not-cache.vcl";
 	include "fetch-do-not-cache-domains.vcl";
 	include "fetch-do-not-cache-static-content.vcl";
@@ -68,6 +69,10 @@ sub vcl_deliver {
     unset resp.http.Via;
     unset resp.http.X-Varnish;
     unset resp.http.X-Pingback;
+
+	### Uncomment the following, if Varnish handles compression
+	# unset resp.http.Server;
+	# set resp.http.Vary = "Accept-Encoding";
 
 	# Display the number of hits
 	if (obj.hits > 0) {
