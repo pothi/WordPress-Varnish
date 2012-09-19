@@ -25,6 +25,13 @@ if (req.url ~ "\.(css|js)") {
 	return (hit_for_pass);
 }
 
+# HTML
+if (req.url ~ "\.html?$") {
+	unset beresp.http.cookie;
+	set beresp.http.X-Cacheable = "NO: HTML files aren't cached";
+	return (hit_for_pass);
+}
+
 
 # Fonts
 if (req.url ~ "\.(woff|eot|otf|ttf)") {
