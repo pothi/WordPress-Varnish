@@ -31,7 +31,7 @@ if (req.url ~ "\.(woff|eot|otf|ttf)") {
 
 
 # Other static content
-if (req.url ~ "\.(zip|sql|tar|gz|bzip2)") {
+if (req.url ~ "\.(zip|sql|tar|gz|bzip2|mp3|mp4|flv|ogg|swf)") {
 	unset beresp.http.cookie;
 	return (hit_for_pass);
 }
