@@ -1,8 +1,5 @@
 ### This file basically contains things that shouldn't be cached by Varnish after fetching from the backend
 
-# Do not cache the domains listed in the following file
-include "fetch-do-not-cache-domains.vcl";
-
 # Admin pages
 if (req.url ~ "wp-(login|admin)" || req.url ~ "preview=true") {
 	set beresp.http.Cache-Control = "max-age=0";
@@ -22,5 +19,3 @@ if (beresp.status != 200) {
 }
 
 
-# Do not cache any static content
-include "fetch-do-not-cache-static-content.vcl";
