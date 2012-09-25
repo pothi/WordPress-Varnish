@@ -75,7 +75,6 @@ sub vcl_deliver {
     unset resp.http.X-Pingback;
 
 	### Uncomment the following, if Varnish handles compression
-	# unset resp.http.Server;
 	# set resp.http.Vary = "Accept-Encoding";
 
 	# Display the number of hits
