@@ -53,12 +53,16 @@ sub vcl_fetch {
 
 	# custom rules
 
+	# if a requests reaches this stage, then it is cacheable
+	set beresp.http.X-Cacheable = "YES";
+
+	# setup cache control, if backend doesn't
+	# unset beresp.http.expires;
+	# set beresp.http.Cache-Control = "max-age=2678400";
+	
 	# The default value of 120s can be modified here
 	# set beresp.ttl = 300s;
 
-	# if a requests reaches this stage, then it is cacheable
-	set beresp.http.X-Cacheable = "YES";
-	
 	return (deliver);
 }
 
