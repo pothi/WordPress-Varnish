@@ -3,11 +3,13 @@
 ### Even if you don't use a CDN and if you use memory for Varnish caching, then put it in your vcl_fetch too!
 
 # Sitemaps
-if (req.url ~ "\.xml(\.gz)?$") {
-	unset beresp.http.cookie;
-	set beresp.http.X-Cacheable = "NO: Sitemaps aren't cached";
-	return (hit_for_pass);
-}
+# Uncomment the following if statement, if WordPress SEO by Yoast is NOT used
+# Because WP SEO generates the sitemaps on the fly; so that should be cached
+# if (req.url ~ "\.xml(\.gz)?$") {
+# 	unset beresp.http.cookie;
+# 	set beresp.http.X-Cacheable = "NO: Sitemaps aren't cached";
+# 	return (hit_for_pass);
+# }
 
 
 # Images

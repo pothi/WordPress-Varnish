@@ -1,7 +1,9 @@
 # Sitemaps
-if (req.url ~ "\.xml(\.gz)?$") {
-    return (pass);
-}
+# Uncomment the following if statement, if WordPress SEO by Yoast is NOT used
+# Because WP SEO generates the sitemaps on the fly; so that should be cached
+# if (req.url ~ "\.xml(\.gz)?$") {
+#     return (pass);
+# }
 
 
 # Images
