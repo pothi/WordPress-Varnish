@@ -52,21 +52,11 @@ sub vcl_fetch {
   include "fetch-do-not-cache-static-content.vcl";
 
   # custom rules
+  # include "conf.d/expires.vcl";
 
   # if a requests reaches this stage, then it is cacheable
   set beresp.http.X-Cacheable = "YES";
 
-  # setup cache control, if backend doesn't, especially for static files
-  # use case - Apache backend without mod_expires
-  # if (req.url ~ "\.(jpg|jpeg|png|gif|ico|tiff|tif|bmp|ppm|pgm|xcf|psd|webp|svg)"
-   # || req.url ~ "\.(css|js)"
-   # || req.url ~ "\.html?$"
-   # || req.url ~ "\.(woff|eot|otf|ttf)"
-   # ) {
-      # unset beresp.http.expires;
-      # set beresp.http.Cache-Control = "max-age=2678400";
-  # }
-  
   # The default value of 120s can be modified here
   # set beresp.ttl = 300s;
 
