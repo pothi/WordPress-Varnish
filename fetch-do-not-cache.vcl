@@ -7,10 +7,16 @@ if (req.url ~ "wp-(login|admin)" || req.url ~ "preview=true") {
   return (hit_for_pass);
 }
 
+# PHP
+if (req.url ~ "\.php$") {
+  set beresp.http.X-Cacheable = "NO: PHP!";
+  return (hit_for_pass);
+}
+
 # Contact Pages
 if (req.url ~ "contact") {
   set beresp.http.X-Cacheable = "NO: Contact Page";
-    return (hit_for_pass);
+  return (hit_for_pass);
 }
 
 
