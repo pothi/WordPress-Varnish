@@ -68,3 +68,30 @@ sub vcl_deliver {
   
     return (deliver);
 }
+
+# The data on which the hashing will take place
+sub vcl_hash {
+    hash_data(req.url);
+
+    if (req.http.host) {
+        hash_data(req.http.host);
+    } else {
+        hash_data(server.ip);
+    }
+
+    # hash cookies for object with auth
+    if (req.http.Cookie) {
+        hash_data(req.http.Cookie);
+    }
+    if (req.http.Authorization) {
+        hash_data(req.http.Authorization);
+    }
+
+    # If the client supports compression, keep that in a different cache
+    if (req.http.Accept-Encoding) {
+        hash_data(req.http.Accept-Encoding);
+    }
+
+    return (hash);
+}
+
