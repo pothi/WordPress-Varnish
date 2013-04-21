@@ -52,7 +52,7 @@ sub vcl_fetch {
   include "fetch-do-not-cache-static-content.vcl";
 
   # custom rules
-  # include "conf.d/expires.vcl";
+  # include "conf.d/fetch/expires.vcl";
 
   # if a requests reaches this stage, then it is cacheable
   set beresp.http.X-Cacheable = "YES";
