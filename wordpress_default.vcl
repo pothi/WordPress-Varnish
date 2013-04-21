@@ -19,6 +19,7 @@ acl purge {
 }
 
 sub vcl_recv {
+  include "conf.d/receive/pagespeed.vcl";
   include "receive.vcl";
   include "receive-do-not-lookup.vcl";
   include "receive-do-not-lookup-domains.vcl";
@@ -48,6 +49,7 @@ sub vcl_miss {
 sub vcl_fetch {
   include "fetch.vcl";
   include "fetch-do-not-cache.vcl";
+  include "conf.d/fetch/pagespeed.vcl";
   include "fetch-do-not-cache-domains.vcl";
   include "fetch-do-not-cache-static-content.vcl";
 
