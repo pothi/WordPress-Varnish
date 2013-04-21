@@ -1,22 +1,5 @@
-# The name of the backend (nginx) could be anything;
-backend nginx {
-  .host = "127.0.0.1";
-  .port = "8888";
-
-  # For slow backends
-  .first_byte_timeout = 300s;
-  .connect_timeout = 300s;
-  .between_bytes_timeout = 300s;
-}
-
-acl purge {
-  "localhost";
-  "127.0.0.1";
-
-# uncomment the following, after modifying it
-# "yo.ur.ip.no";
-
-}
+include "backend.vcl";
+include "acl.vcl";
 
 sub vcl_recv {
   include "conf.d/receive/pagespeed.vcl";
