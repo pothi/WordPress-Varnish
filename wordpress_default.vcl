@@ -49,12 +49,11 @@ sub vcl_fetch {
 }
 
 sub vcl_deliver {
-    # Hide server header
-    unset resp.http.X-Powered-By;
-    unset resp.http.Server;
-    unset resp.http.Via;
-    unset resp.http.X-Varnish;
-    unset resp.http.X-Pingback;
+  # Comment it out to see useful headers (for example, while debugging)
+  include "conf.d/deliver/hide_headers.vcl
+
+  # If your site uses CloudFront, you may want to enable / uncomment the following
+  # include "conf.d/deliver/cloudfront.vcl;
 
   ### Uncomment the following, if Varnish handles compression
   # set resp.http.Vary = "Accept-Encoding";
