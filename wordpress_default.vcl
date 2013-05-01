@@ -50,7 +50,7 @@ sub vcl_fetch {
 
 sub vcl_deliver {
   # Comment it out to see useful headers (for example, while debugging)
-  include "conf.d/deliver/hide_headers.vcl
+  include "conf.d/deliver/hide_headers.vcl";
 
   # If your site uses CloudFront, you may want to enable / uncomment the following
   # include "conf.d/deliver/cloudfront.vcl;
