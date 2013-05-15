@@ -38,6 +38,7 @@ sub vcl_fetch {
 
   # custom rules
   # include "conf.d/fetch/expires.vcl";
+  # include "conf.d/fetch/gzip.vcl";
 
   # if a requests reaches this stage, then it is cacheable
   set beresp.http.X-Cacheable = "YES";
