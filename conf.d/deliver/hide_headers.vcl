@@ -6,3 +6,4 @@ unset resp.http.Age;
 unset resp.http.X-Cacheable;
 unset resp.http.X-Cache;
 unset resp.http.X-Powered-By;
+unset resp.http.X-Mod-Pagespeed;
