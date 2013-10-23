@@ -8,6 +8,9 @@ sub vcl_recv {
   include "receive-do-not-lookup-domains.vcl";
   include "receive-do-not-lookup-static-content.vcl";
 
+  # Let Pagespeed fully optimize a request before it is cached
+  set req.http.X-PSA-Blocking-Rewrite = "fullyoptimized";
+
   # custom rules
 
   return (lookup);
