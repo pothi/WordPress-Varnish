@@ -8,6 +8,13 @@ sub vcl_recv {
   include "receive-do-not-lookup-domains.vcl";
   include "receive-do-not-lookup-static-content.vcl";
 
+  # https://www.varnish-cache.org/docs/3.0/tutorial/handling_misbehaving_servers.html#grace-mode
+  if (! req.backend.healthy) {
+     set req.grace = 5m;
+  } else {
+     set req.grace = 15s;
+  }
+
   # Let Pagespeed fully optimize a request before it is cached
   set req.http.X-PSA-Blocking-Rewrite = "fullyoptimized";
 
@@ -42,6 +49,15 @@ sub vcl_fetch {
   # custom rules
   # include "conf.d/fetch/expires.vcl";
   # include "conf.d/fetch/gzip.vcl";
+
+  # Saint mode
+  # https://www.varnish-cache.org/docs/3.0/tutorial/handling_misbehaving_servers.html#saint-mode
+  if (beresp.status == 500) {
+    set beresp.saintmode = 10s;
+    # No restart, if only one server is present
+    # return(restart);
+  }
+  set beresp.grace = 5m;
 
   # if a requests reaches this stage, then it is cacheable
   set beresp.http.X-Cacheable = "YES";
