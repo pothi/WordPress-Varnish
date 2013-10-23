@@ -2,7 +2,7 @@ include "backend.vcl";
 include "acl.vcl";
 
 sub vcl_recv {
-  include "conf.d/receive/pagespeed.vcl";
+  # include "conf.d/receive/pagespeed.vcl";
   include "receive.vcl";
   include "receive-do-not-lookup.vcl";
   include "receive-do-not-lookup-domains.vcl";
@@ -32,7 +32,7 @@ sub vcl_miss {
 sub vcl_fetch {
   include "fetch.vcl";
   include "fetch-do-not-cache.vcl";
-  include "conf.d/fetch/pagespeed.vcl";
+  # include "conf.d/fetch/pagespeed.vcl";
   include "fetch-do-not-cache-domains.vcl";
   include "fetch-do-not-cache-static-content.vcl";
 
@@ -50,9 +50,6 @@ sub vcl_fetch {
 }
 
 sub vcl_deliver {
-  # Comment it out to see useful headers (for example, while debugging)
-  include "conf.d/deliver/hide_headers.vcl";
-
   # If your site uses CloudFront, you may want to enable / uncomment the following
   # include "conf.d/deliver/cloudfront.vcl;
 
@@ -65,8 +62,11 @@ sub vcl_deliver {
   } else {
     set resp.http.X-Cache = "MISS";
   }
-  
-    return (deliver);
+
+  # Comment it out to see useful headers (for example, while debugging)
+  # include "conf.d/deliver/hide_headers.vcl";
+
+  return (deliver);
 }
 
 # The data on which the hashing will take place
