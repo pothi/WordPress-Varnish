@@ -4,7 +4,7 @@ backend apache {
 
   # Make sure, the backend can respond to PING
   .probe = { 
-    .url       = /ping;
+    .url       = "/ping";
     .timeout   = 5s;
     .interval  = 10s;
     .window    = 5;
@@ -23,7 +23,7 @@ backend nginx {
 
   # Make sure, the backend can respond to PING
   .probe = { 
-    .url       = /ping;
+    .url       = "/ping";
     .timeout   = 5s;
     .interval  = 10s;
     .window    = 5;
