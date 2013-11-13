@@ -12,7 +12,7 @@ if (req.http.Cookie ~ "wordpress_" || req.http.Cookie ~ "comment_") {
 }
 
 # Check the admin pages
-if (req.url ~ "wp-(login|admin)" || req.url ~ "preview=true") {
+if (req.url ~ "wp-(login|admin/)" || req.url ~ "preview=true") {
   return (pass);
 }
 

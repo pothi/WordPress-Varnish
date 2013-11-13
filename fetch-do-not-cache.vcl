@@ -1,7 +1,7 @@
 ### This file basically contains things that shouldn't be cached by Varnish after fetching from the backend
 
 # Admin pages
-if (req.url ~ "wp-(login|admin)" || req.url ~ "preview=true") {
+if (req.url ~ "wp-(login|admin/)" || req.url ~ "preview=true") {
   set beresp.http.X-Cacheable = "NO: User is logged-in!";
   set beresp.http.Cache-Control = "max-age=0";
   return (hit_for_pass);
