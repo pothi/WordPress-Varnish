@@ -18,6 +18,12 @@ if (req.url ~ "\.(css|js)") {
 }
 
 
+# HTML & text
+if (req.url ~ "\.(html?|txt)") {
+  return( pass );
+}
+
+
 # Fonts
 if (req.url ~ "\.(woff|eot|otf|ttf)") {
   return (pass);
